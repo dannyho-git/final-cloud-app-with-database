@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 # <HINT> Import any new Models here
-from .models import Course, Enrollment, Question, Choice, Submission
+from .models import Course, Enrollment, Question, Choice, Submission, Lesson
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
@@ -113,12 +113,12 @@ def enroll(request, course_id):
 #def submit(request, course_id):
 def submit(request, lesson_id):
     user = request.user
-    lesson = lesson.objects.get(pk=lesson_id)
+    lesson = Lesson.objects.get(pk=lesson_id)
     course = Course.objects.get(pk=lesson.course_id)
     enrollment = Enrollment.objects.get(user=user, course=course)
     submission = Submission.objects.create(enrollment=enrollment)
     submitted_anwsers = extract_answers(request)
-    submission.chocies.set(submitted_anwsers)
+    submission.choices.set(submitted_anwsers)
     return HttpResponseRedirect(reverse(viewname='onlinecourse:show_exam_result', args=(course.id, submission.id)))
 
 # <HINT> A example method to collect the selected choices from the exam form from the request object
