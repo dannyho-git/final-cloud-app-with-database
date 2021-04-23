@@ -57,8 +57,23 @@
                     <div class="card-body">
                         <!-- for each choice in the question -->
                         {% for choice in question.choice_set.all %}
-                            
-                        
+                            {% if choice in selected_choices %}
+                                {% if choice.is_correct %}
+                                    <!-- selected correctly -->
+                                    <p class="alert alert-success">Correct Answer: {{choice}}></p>
+                                {% else %}
+                                    <!-- should but not selected -->
+                                    <p class="alert alert-danger">Not Selected: {{choice}}></p>
+                                {% endif %}
+                            {% else %}
+                                {% if choice.is_correct %}
+                                    <!-- should but selected -->
+                                    <p class="alert alert-success">Correct Answer: {{choice}}></p>
+                                {% else %}
+                                    <!-- unselected correctly -->
+                                    <p class="alert alert-danger">Not Selected: {{choice}}></p>
+                                {% endif %}
+                            {% endif %}
                         {% endfor %}                                            
                     </div>
                 </div>
