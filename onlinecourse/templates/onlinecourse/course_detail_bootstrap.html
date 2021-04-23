@@ -55,7 +55,7 @@
                         style="background-color:darkcyan">Start Exam</button>
 
                         <div id="exam_{{lesson.id}}" class="collapse">
-                            <form id="questionform" action="{% url 'onlinecourse:submit' lesson.id %}" method="post">
+                            <form id="questionform" action="{% url 'onlinecourse:submit' course.id lesson.id %}" method="post">
                                 <!-- for each question in the course -->
                                 {% for question in lesson.question_set.all %}
                                     <div class="card mt-1">
