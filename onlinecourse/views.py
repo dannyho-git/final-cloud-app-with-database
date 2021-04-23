@@ -160,7 +160,6 @@ def show_exam_result(request, lesson_id, submission_id):
     context = {
         'lesson' : lesson, 
         'selected_choices' : selected_choices,
-        'total_score' : total_score,
         'grade' : final_grade,
     }
 
